@@ -6,25 +6,39 @@ document.addEventListener('DOMContentLoaded', () => {
   const width = 10;
 
   // Tetrominos
-  const lBlock = [
+  const jBlock = [
+    [1, width+1, width*2, width*2+1],
+    [width, width+1, width+2, width*2+2],
     [1, width+1, width*2+1, 2],
-    [width, width+1, width*2, width*2+2],
-    [1, width+1, width*2+1, width*2],
     [width, width*2, width*2+1, width*2+2]
   ] 
 
+  const lBlock = [
+    [1, width+1, width*2+1, width*2+2],
+    [width, width+1, width+2, width*2],
+    [0, 1, width+2, width*2],
+    [width+2, width*2, width*2+1, width*2+2]
+  ] 
+
   const sBlock = [
-    [width*2, width*2+1, width+1, width+2],
+    [width+1, width+2, width*2, width*2+1],
     [0, width, width+1, width*2+1],
-    [width*2, width*2+1, width+1, width+2],
+    [width+1, width+2, width*2, width*2+1],
     [0, width, width+1, width*2+1]
   ]
 
+  const zBlock = [
+    [width, width+1, width*2+1, width*2+2],
+    [2, width, width+1, width*2+1],
+    [width*2, width*2+1, width+1, width+2],
+    [2, width, width+1, width*2+1]
+  ]
+
   const tBlock = [
-    [width, width+1, 1, width+2],
+    [1, width, width+1, width+2],
     [1, width+1, width+2, width*2+1],
-    [width, width+1, width*2+1, width+2],
-    [1, width+1, width, width*2+1]
+    [width, width+1, width+2, width*2+1],
+    [1, width, width+1, width*2+1]
   ]
   
   const oBlock = [
