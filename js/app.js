@@ -6,55 +6,100 @@ document.addEventListener('DOMContentLoaded', () => {
   const width = 10;
 
   // Tetrominos
-  const jBlock = [
+  const jTetromino = [
     [1, width+1, width*2, width*2+1],
     [width, width+1, width+2, width*2+2],
     [1, width+1, width*2+1, 2],
     [width, width*2, width*2+1, width*2+2]
   ] 
 
-  const lBlock = [
+  const lTetromino = [
     [1, width+1, width*2+1, width*2+2],
     [width, width+1, width+2, width*2],
     [0, 1, width+2, width*2],
     [width+2, width*2, width*2+1, width*2+2]
   ] 
 
-  const sBlock = [
+  const sTetromino = [
     [width+1, width+2, width*2, width*2+1],
     [0, width, width+1, width*2+1],
     [width+1, width+2, width*2, width*2+1],
     [0, width, width+1, width*2+1]
   ]
 
-  const zBlock = [
+  const zTetromino = [
     [width, width+1, width*2+1, width*2+2],
     [2, width, width+1, width*2+1],
     [width*2, width*2+1, width+1, width+2],
     [2, width, width+1, width*2+1]
   ]
 
-  const tBlock = [
+  const tTetromino = [
     [1, width, width+1, width+2],
     [1, width+1, width+2, width*2+1],
     [width, width+1, width+2, width*2+1],
     [1, width, width+1, width*2+1]
   ]
   
-  const oBlock = [
+  const oTetromino = [
     [0, 1, width, width+1],
     [0, 1, width, width+1],
     [0, 1, width, width+1],
     [0, 1, width, width+1]
   ]
   
-  const iBlock = [
+  const iTetromino = [
     [1, width+1, width*2+1, width*3+1],
     [width, width+1, width+2, width+3],
     [1, width+1, width*2+1, width*3+1],
     [width, width+1, width+2, width+3]
   ]
 
+  const tetrominos = [jTetromino, lTetromino, sTetromino, zTetromino, tTetromino, oTetromino, iTetromino]
 
+  let currentPosition = 4;
+  let currentForm = 0;
+
+  // select a random Tetromino in its first form
+  let randomTetromino = Math.floor(Math.random() * tetrominos.length);
+  let currentTetromino = tetrominos[randomTetromino][currentForm];
+
+  // drawing the tetromino
+  function draw() {
+    currentTetromino.forEach(index =>{
+      squares[currentPosition + index].classList.add('tetromino');
+    })
+  }
+
+  // undrawing the tetromino
+  function undraw() {
+    currentTetromino.forEach(index =>{
+      squares[currentPosition + index].classList.remove('tetromino');
+    })
+  } 
+
+  // set tetromino to fall every second
+  timer = setInterval(moveDown, 1000);
+
+  // move down the tetromino
+  function moveDown() {
+    undraw();
+    currentPosition += width;
+    draw();
+    freeze();
+  }
+
+  // freeze the tetromino
+  function freeze() {
+    // The some() method tests whether at least one element in the array passes the test
+    if(currentTetromino.some(index => squares[currentPosition + index + width].classList.contains('stop'))) {
+      currentTetromino.forEach(index => squares[currentPosition + index].classList.add('stop'));
+      // make a new tetromino fall
+      randomTetromino = Math.floor(Math.random() * tetrominos.length);
+      currentTetromino = tetrominos[randomTetromino][currentForm];
+      currentPosition = 4;
+      draw();
+    }
+  }
 
 })
