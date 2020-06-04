@@ -81,6 +81,15 @@ document.addEventListener('DOMContentLoaded', () => {
   // set tetromino to fall every second
   timer = setInterval(moveDown, 1000);
 
+  // assign functions to inputs
+  function input(i) {
+    if(i.keyCode === 37) {
+      moveLeft();
+    }
+  }
+  document.addEventListener('keyup', input);
+
+
   // move down the tetromino
   function moveDown() {
     undraw();
@@ -102,15 +111,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Rules
+  // moves tetromino to the left unless there's another one / is at the left edge
   function moveLeft () {
     undraw();
     // check if tetromino is in the left edge(indexes divisable by 10 >> 0, 10, 20..)
-    const leftEdge = currentTetromino.some(index => (currentPosition + index) % width == 0);
+    const atLeftEdge = currentTetromino.some(index => (currentPosition + index) % width === 0);
     // will move left if not on the left edge
-    if(!leftEdge) currentPosition -= 1;
+    if(!atLeftEdge) currentPosition -= 1;
     // move back if there's a frozen tetromino on your left
-    if(currentTetromino.some(index => squares[currentPosition = index].classList.contains('stop'))) {
+    if(currentTetromino.some(index => squares[currentPosition + index].classList.contains('stop'))) {
       currentPosition +=1
     }
 
