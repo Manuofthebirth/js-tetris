@@ -102,4 +102,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Rules
+  function moveLeft () {
+    undraw();
+    // check if tetromino is in the left edge(indexes divisable by 10 >> 0, 10, 20..)
+    const leftEdge = currentTetromino.some(index => (currentPosition + index) % width == 0);
+    // will move left if not on the left edge
+    if(!leftEdge) currentPosition -= 1;
+    // move back if there's a frozen tetromino on your left
+    if(currentTetromino.some(index => squares[currentPosition = index].classList.contains('stop'))) {
+      currentPosition +=1
+    }
+
+    draw();
+  }
+
 })
