@@ -7,31 +7,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Tetrominos
   const jTetromino = [
-    [1, width+1, width*2, width*2+1],
-    [width, width+1, width+2, width*2+2],
+    [width, width*2, width*2+1, width*2+2],
     [1, width+1, width*2+1, 2],
-    [width, width*2, width*2+1, width*2+2]
+    [width, width+1, width+2, width*2+2],
+    [1, width+1, width*2, width*2+1]
   ] 
 
   const lTetromino = [
-    [1, width+1, width*2+1, width*2+2],
+    [width+2, width*2, width*2+1, width*2+2],
+    [width*2+2, 1, width+1, width*2+1],
     [width, width+1, width+2, width*2],
-    [0, 1, width+2, width*2],
-    [width+2, width*2, width*2+1, width*2+2]
+    [1, 2, width+2, width*2+2]
   ] 
 
   const sTetromino = [
-    [width+1, width+2, width*2, width*2+1],
+    [width+1, width, 1, 2],
     [0, width, width+1, width*2+1],
-    [width+1, width+2, width*2, width*2+1],
+    [width+1, width, 1, 2],
     [0, width, width+1, width*2+1]
   ]
 
   const zTetromino = [
-    [width, width+1, width*2+1, width*2+2],
-    [2, width, width+1, width*2+1],
-    [width*2, width*2+1, width+1, width+2],
-    [2, width, width+1, width*2+1]
+    [width+2, width+1, 0, 1],
+    [1, width+1, width, width*2],
+    [width+2, width+1, 0, 1],
+    [1, width+1, width, width*2]
   ]
 
   const tTetromino = [
@@ -49,10 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
   ]
   
   const iTetromino = [
-    [1, width+1, width*2+1, width*3+1],
     [width, width+1, width+2, width+3],
     [1, width+1, width*2+1, width*3+1],
-    [width, width+1, width+2, width+3]
+    [width, width+1, width+2, width+3],
+    [1, width+1, width*2+1, width*3+1]
   ]
 
   const tetrominos = [jTetromino, lTetromino, sTetromino, zTetromino, tTetromino, oTetromino, iTetromino]
@@ -85,6 +85,12 @@ document.addEventListener('DOMContentLoaded', () => {
   function input(i) {
     if(i.keyCode === 37) {
       moveLeft();
+    } else if(i.keyCode === 39) {
+      moveRight();
+    } else if(i.keyCode === 38) {
+      rotateTetromino();
+    } else if(i.keyCode === 40) {
+      moveDown();
     }
   }
   document.addEventListener('keyup', input);
@@ -105,6 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
       currentTetromino.forEach(index => squares[currentPosition + index].classList.add('stop'));
       // make a new tetromino fall
       randomTetromino = Math.floor(Math.random() * tetrominos.length);
+      currentForm = 0;
       currentTetromino = tetrominos[randomTetromino][currentForm];
       currentPosition = 4;
       draw();
@@ -126,4 +133,18 @@ document.addEventListener('DOMContentLoaded', () => {
     draw();
   }
 
+  // moves tetromino to the right unless there's another one / is at the right edge
+  function moveRight () {
+    undraw();
+    // check if tetromino is in the right edge(indexes 9, 19, 29..)
+    const atRightEdge = currentTetromino.some(index => (currentPosition + index) % width === width -1);
+    // will move right if not on the right edge
+    if(!atRightEdge) currentPosition += 1;
+    // move back if there's a frozen tetromino on your right
+    if(currentTetromino.some(index => squares[currentPosition + index].classList.contains('stop'))) {
+      currentPosition -=1
+    }
+
+    draw();
+  }
 })
