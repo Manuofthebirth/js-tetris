@@ -104,6 +104,18 @@ document.addEventListener('DOMContentLoaded', () => {
     freeze();
   }
 
+  // rotate the tetromino
+  function rotateTetromino() {
+    undraw();
+    currentForm++;
+    // resets to 1st form in 4th rotation
+    if(currentForm === currentTetromino.length) {
+      currentForm = 0;
+    }
+    currentTetromino = tetrominos[randomTetromino][currentForm];
+    draw();
+  }
+
   // freeze the tetromino
   function freeze() {
     // The some() method tests whether at least one element in the array passes the test
