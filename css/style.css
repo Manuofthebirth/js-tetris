@@ -1,16 +1,29 @@
+.container-fluid {
+  display: flex;
+}
+
 .grid {
-  width: 200px;
-  height: 400px;
   background-color: #C8C7A8;
   display: flex;
   flex-wrap: wrap;
-}
-
-.grid div {
-  height: 20px;
-  width: 20px;
+  height: 400px;
+  width: 200px;
 }
 
 .grid .tetromino {
   background-color: #db1d04;
+}
+
+.nextup-grid {
+  background-color: #C8C7A8;
+  display: flex;
+  flex-wrap: wrap;
+  height: 80px;
+  margin-left: 30px;
+  width: 80px;
+}
+
+.square {
+  height: 20px;
+  width: 20px;
 }
