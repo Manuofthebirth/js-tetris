@@ -2,9 +2,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const grid = document.querySelector('.game-grid');
   let squares = Array.from(document.querySelectorAll('.game-grid div')); // select all divs in game grid
   const scoreDisplay = document.querySelector('.score-num');
-  const startBtn = document.querySelector('.star-btn');
+  const startBtn = document.querySelector('.start-btn');
   const width = 10;
   let nextRandom = 0;
+  let score = 0;
+  let timer; // null value by default
+  
+  // tetromino colors
+  const colors = [
+    'orange',
+    'navy',
+    'green',
+    'red',
+    'purple',
+    'yellow',
+    'blue'
+  ]
 
   // Tetrominos
   const jTetromino = [
@@ -58,8 +71,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const tetrominos = [jTetromino, lTetromino, sTetromino, zTetromino, tTetromino, oTetromino, iTetromino]
 
-  let currentPosition = 4;
-  let currentRotation = 0; // default
+  let currentPosition = 4; // default position
+  let currentRotation = 0; // default rotation
 
   // select a random Tetromino in its default rotation
   let randomTetromino = Math.floor(Math.random() * tetrominos.length);
@@ -69,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function draw() {
     currentTetromino.forEach(index =>{
       squares[currentPosition + index].classList.add('tetromino');
+      squares[currentPosition + index].style.backgroundColor = colors[randomTetromino];
     })
   }
 
@@ -76,11 +90,12 @@ document.addEventListener('DOMContentLoaded', () => {
   function undraw() {
     currentTetromino.forEach(index =>{
       squares[currentPosition + index].classList.remove('tetromino');
+      squares[currentPosition + index].style.backgroundColor = '';
     })
   } 
 
-  // set tetromino to fall every second
-  timer = setInterval(moveDown, 1000);
+  // set tetromino to fall every second / EDIT: commented so game can start normally
+  // timer = setInterval(moveDown, 1000);
 
   // assign functions to inputs
   function input(i) {
@@ -120,16 +135,18 @@ document.addEventListener('DOMContentLoaded', () => {
   // freeze the tetromino
   function freeze() {
     // The some() method tests whether at least one element in the array passes the test
-    if(currentTetromino.some(index => squares[currentPosition + index + width].classList.contains('stop'))) {
-      currentTetromino.forEach(index => squares[currentPosition + index].classList.add('stop'));
+    if(currentTetromino.some(index => squares[currentPosition + index + width].classList.contains('taken'))) {
+      currentTetromino.forEach(index => squares[currentPosition + index].classList.add('taken'));
       // make a new tetromino fall
       randomTetromino = nextRandom;
       nextRandom = Math.floor(Math.random() * tetrominos.length);
-      currentRotation = 0;
+      currentRotation = 0; // default
       currentTetromino = tetrominos[randomTetromino][currentRotation];
-      currentPosition = 4;
+      currentPosition = 4; // default
       draw();
       displayTetromino();
+      increaseScore();
+      gameOver();
     }
   }
 
@@ -141,10 +158,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // will move left if not on the left edge
     if(!atLeftEdge) currentPosition -= 1;
     // move back if there's a frozen tetromino on your left
-    if(currentTetromino.some(index => squares[currentPosition + index].classList.contains('stop'))) {
+    if(currentTetromino.some(index => squares[currentPosition + index].classList.contains('taken'))) {
       currentPosition +=1
     }
-
     draw();
   }
 
@@ -156,10 +172,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // will move right if not on the right edge
     if(!atRightEdge) currentPosition += 1;
     // move back if there's a frozen tetromino on your right
-    if(currentTetromino.some(index => squares[currentPosition + index].classList.contains('stop'))) {
+    if(currentTetromino.some(index => squares[currentPosition + index].classList.contains('taken'))) {
       currentPosition -=1
     }
-
     draw();
   }
 
@@ -185,10 +200,57 @@ document.addEventListener('DOMContentLoaded', () => {
     // remove traces of tetromino block in display grid
     displaySquares.forEach(square => {
       square.classList.remove('tetromino');
+      square.style.backgroundColor = '';
     })
     // add a tetromino block in display grid
     nextTetrominos[nextRandom].forEach( index => {
       displaySquares[displayIndex + index].classList.add('tetromino');
+      displaySquares[displayIndex + index].style.backgroundColor = colors[nextRandom];
     })
   }
+
+  // start/pause button
+  startBtn.addEventListener('click', () => {
+    // if time value isn't null >> pause
+    if (timer) {
+      clearInterval(timer);
+      timer = null;
+    } else {
+      draw();
+      timer = setInterval(moveDown, 1000);
+      nextRandom = Math.floor(Math.random()*tetrominos.length);
+      displayTetromino();
+    }
+  })
+
+  // increase score
+  function increaseScore() {
+    for (let i=0; i < 199; i+=width) {
+      const gridRow = [i, i+1, i+2, i+3, i+4, i+5, i+6, i+7, i+8, i+9] 
+
+      // check if every square in a row is taken (remove line(s) if true)
+      if(gridRow.every(index => squares[index].classList.contains('taken'))) {
+        // increase score, remove then replace line taken
+        score++;
+        scoreDisplay.innerHTML = score;
+        gridRow.forEach(index =>{
+          squares[index].classList.remove('taken');
+          squares[index].classList.remove('tetromino');
+          squares[index].style.backgroundColor = '';
+        })
+        const squaresRemoved = squares.splice(i, width);
+        squares = squaresRemoved.concat(squares);
+        squares.forEach(line => grid.appendChild(line));
+      }
+    }
+  }
+
+  // game over >> when a tetromino in the default position overwrites another
+  function gameOver() {
+    if(currentTetromino.some(index => squares[currentPosition + index].classList.contains('taken'))) {
+      scoreDisplay.innerHTML = 'Game Over';
+      clearInterval(timer);
+    }
+  }
+
 })
