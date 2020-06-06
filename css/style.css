@@ -2,18 +2,6 @@
   display: flex;
 }
 
-.game-grid {
-  background-color: #C8C7A8;
-  display: flex;
-  flex-wrap: wrap;
-  height: 400px;
-  width: 200px;
-}
-
-.game-grid .tetromino {
-  background-color: #db1d04;
-}
-
 .display-next-grid {
   background-color: #C8C7A8;
   display: flex;
@@ -25,6 +13,20 @@
 
 .display-next-grid .tetromino {
   background-color: #0424db;
+  border-style: outset;
+}
+
+.game-grid {
+  background-color: #C8C7A8;
+  display: flex;
+  flex-wrap: wrap;
+  height: 400px;
+  width: 200px;
+}
+
+.game-grid .tetromino {
+  background-color: #db1d04;
+  border-style: outset;
 }
 
 .square {
