@@ -2,7 +2,7 @@
   display: flex;
 }
 
-.grid {
+.game-grid {
   background-color: #C8C7A8;
   display: flex;
   flex-wrap: wrap;
@@ -10,17 +10,21 @@
   width: 200px;
 }
 
-.grid .tetromino {
+.game-grid .tetromino {
   background-color: #db1d04;
 }
 
-.nextup-grid {
+.display-next-grid {
   background-color: #C8C7A8;
   display: flex;
   flex-wrap: wrap;
   height: 80px;
   margin-left: 30px;
   width: 80px;
+}
+
+.display-next-grid .tetromino {
+  background-color: #0424db;
 }
 
 .square {
