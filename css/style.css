@@ -1,13 +1,33 @@
-.grid {
-  width: 200px;
-  height: 400px;
-  background-color: #28281C;
+.container-fluid {
   display: flex;
-  flex-wrap: wrap;
 }
 
-.grid div {
+.display-next-grid {
+  background-color: #C8C7A8;
+  display: flex;
+  flex-wrap: wrap;
+  height: 80px;
+  margin-left: 30px;
+  width: 80px;
+}
+
+.display-next-grid .tetromino {
+  border-style: outset;
+}
+
+.game-grid {
+  background-color: #C8C7A8;
+  display: flex;
+  flex-wrap: wrap;
+  height: 400px;
+  width: 200px;
+}
+
+.game-grid .tetromino {
+  border-style: outset;
+}
+
+.square {
   height: 20px;
   width: 20px;
-  background-color: #C8C7A8;
 }
