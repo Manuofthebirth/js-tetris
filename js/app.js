@@ -8,15 +8,15 @@ document.addEventListener('DOMContentLoaded', () => {
   let score = 0;
   let timer; // null value by default
   
-  // tetromino colors
+  // tetromino colors (change to sass later)
   const colors = [
-    'orange',
-    'navy',
-    'green',
-    'red',
-    'purple',
-    'yellow',
-    'blue'
+    '#F0A133',
+    '#2E5BD8',
+    '#7DE71D',
+    '#ED4631',
+    '#A86FF0',
+    '#EFED35',
+    '#6AF1F1'
   ]
 
   // Tetrominos
@@ -215,7 +215,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (timer) {
       clearInterval(timer);
       timer = null;
+      playTheme.pause();
     } else {
+      playTheme.play();
       draw();
       timer = setInterval(moveDown, 1000);
       nextRandom = Math.floor(Math.random()*tetrominos.length);

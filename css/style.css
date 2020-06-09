@@ -11,10 +11,6 @@
   width: 80px;
 }
 
-.display-next-grid .tetromino {
-  border-style: outset;
-}
-
 .game-grid {
   background-color: #C8C7A8;
   display: flex;
@@ -23,11 +19,11 @@
   width: 200px;
 }
 
-.game-grid .tetromino {
-  border-style: outset;
-}
-
 .square {
   height: 20px;
   width: 20px;
+}
+
+.tetromino {
+  border-style: outset;
 }
