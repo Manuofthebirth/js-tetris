@@ -111,7 +111,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   document.addEventListener('keyup', input);
 
-
   // move down the tetromino
   function moveDown() {
     undraw();
@@ -143,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
       currentRotation = 0; // default
       currentTetromino = tetrominos[randomTetromino][currentRotation];
       currentPosition = 4; // default
-      draw();
+      // draw(); // bug fix ; duplicate tetromino after cleared line
       displayTetromino();
       increaseScore();
       gameOver();
@@ -220,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
       playTheme.play();
       draw();
       timer = setInterval(moveDown, 1000);
-      nextRandom = Math.floor(Math.random()*tetrominos.length);
+      // nextRandom = Math.floor(Math.random()*tetrominos.length); // bug fix ; start/pause btn was changing next tetromino
       displayTetromino();
     }
   })
