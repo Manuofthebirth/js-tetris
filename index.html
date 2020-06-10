@@ -4,12 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="js/app.js" charset="UTF-8"></script> 
+  <link rel="stylesheet" href="css/style.css">
+  <!-- SFX -->
   <script>
     let playTheme = new Audio('audio/tetris.mp3');
     playTheme.loop = true; 
-    playTheme.load();
   </script>
-  <link rel="stylesheet" href="css/style.css">
+  <script>let clearLine = new Audio('audio/clear-sfx.mp3');</script>
+  <script>let gameOvr = new Audio('audio/game-over.mp3');</script>
+  <script>let frozen = new Audio('audio/taken.mp3');</script>
+  <script>let atEdge = new Audio('audio/edge.mp3');</script>
+  <script>let lvUp = new Audio('audio/lv-up.mp3');</script>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   

@@ -136,6 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // The some() method tests whether at least one element in the array passes the test
     if(currentTetromino.some(index => squares[currentPosition + index + width].classList.contains('taken'))) {
       currentTetromino.forEach(index => squares[currentPosition + index].classList.add('taken'));
+      frozen.play();
       // make a new tetromino fall
       randomTetromino = nextRandom;
       nextRandom = Math.floor(Math.random() * tetrominos.length);
@@ -238,6 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
           squares[index].classList.remove('taken');
           squares[index].classList.remove('tetromino');
           squares[index].style.backgroundColor = '';
+          clearLine.play();
         })
         const squaresRemoved = squares.splice(i, width);
         squares = squaresRemoved.concat(squares);
@@ -251,6 +253,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if(currentTetromino.some(index => squares[currentPosition + index].classList.contains('taken'))) {
       scoreDisplay.innerHTML = 'Game Over';
       clearInterval(timer);
+      playTheme.pause();
+      playTheme.currentTime = 0; // resets theme
+      gameOvr.play();
     }
   }
 
