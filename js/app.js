@@ -99,14 +99,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // assign functions to inputs
   function input(i) {
-    if(i.keyCode === 37) {
-      moveLeft();
-    } else if(i.keyCode === 39) {
-      moveRight();
-    } else if(i.keyCode === 38) {
-      rotateTetromino();
-    } else if(i.keyCode === 40) {
-      moveDown();
+    if (timer != null) {  // only move if not paused || game over
+      if(i.keyCode === 37) {
+        moveLeft();
+      } else if(i.keyCode === 39) {
+        moveRight();
+      } else if(i.keyCode === 38) {
+        rotateTetromino();
+      } else if(i.keyCode === 40) {
+        moveDown();
+      }
     }
   }
   // keydown = you can hold the down btn 
@@ -114,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // move down the tetromino
   function moveDown() {
-    freeze(); // freeze on top (not bottom)= delay before freezing
+    freeze();
     undraw();
     currentPosition += width;
     draw();
@@ -273,6 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
       scoreDisplay.innerHTML = 'Game Over';
       startBtn.innerHTML = 'Restart';
       clearInterval(timer);
+      timer = null;
       playTheme.pause();
       playTheme.currentTime = 0; // resets theme
       gameOvr.play();
