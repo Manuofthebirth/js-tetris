@@ -122,24 +122,21 @@ document.addEventListener('DOMContentLoaded', () => {
     draw();
   }
 
-  function atLeft() {
-    return currentTetromino.some(index => (currentPosition + index) % width === width -1);
-  } 
-  function atRight() {
-    return currentTetromino.some(index => (currentPosition + index) % width === 0);
-  } 
-  
-  function checkRotation(P){
-    if (P % width < 3) {   //add 1 because the position index can be 1 less than where the piece is (with how they are indexed).     
-      if (atLeft()) { 
-      currentPosition -= 1;     //use actual position to check if it's flipped over to right side
-      checkRotation(P)   // Pass position from start, since long block might need to move more.
+  // bug fix: out of bounds rotation
+  function checkRotatedPosition(P){
+    function entersRightSide() { return currentTetromino.some(index=> (currentPosition + index + 1) % width === 0)  }
+    function entersLeftSide() { return currentTetromino.some(index=> (currentPosition + index) % width === 0) }
+    
+    if ((P + 1) % width < 4) {       //adds 1 because the position can be 1 less than where the tetromino is (with how they are indexed).     
+      if (entersRightSide()) {    // checks 
+        currentPosition += 1;    // move back
+        checkRotatedPosition(P); // repeat until it's inside its bounds (iTetromino will need to move back more than once)
+        }
     }
-    }
-    else if (P % width > 6) {
-      if (atRight()){
+    else if (P % width > 5) { // iTetromino (biggest) touches right border at position 6 ; 3 if left border
+      if (entersLeftSide()) {
         currentPosition -= 1;
-        checkRotation(P)
+      checkRotatedPosition(P);
       }
     }
   }
@@ -153,10 +150,9 @@ document.addEventListener('DOMContentLoaded', () => {
       currentRotation = 0;
     } 
     currentTetromino = tetrominos[randomTetromino][currentRotation];
-    checkRotation(currentPosition);
+    checkRotatedPosition(currentPosition);
     draw();
   }
-
 
   // freeze the tetromino
   function freeze() {
@@ -171,10 +167,10 @@ document.addEventListener('DOMContentLoaded', () => {
       currentRotation = 0; // default
       currentTetromino = tetrominos[randomTetromino][currentRotation];
       currentPosition = 4; // default
+      gameOver();
       // draw(); // bug fix ; duplicate tetromino after cleared line
       displayTetromino();
       increaseScore();
-      gameOver();
     }
   }
 
