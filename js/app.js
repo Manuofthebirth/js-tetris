@@ -63,15 +63,15 @@ document.addEventListener('DOMContentLoaded', () => {
   ]
   
   const iTetromino = [
-    [width, width+1, width+2, width+3],
+    [0, 1, 2, 3],
     [1, width+1, width*2+1, width*3+1],
-    [width, width+1, width+2, width+3],
+    [0, 1, 2, 3],
     [1, width+1, width*2+1, width*3+1]
   ]
 
   const tetrominos = [jTetromino, lTetromino, sTetromino, zTetromino, tTetromino, oTetromino, iTetromino]
 
-  let currentPosition = 4; // default position
+  let currentPosition = 14; // default position
   let currentRotation = 0; // default rotation
 
   // select a random Tetromino in its default rotation
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // assign functions to inputs
   function input(i) {
-    if (timer != null) {  // only move if not paused || game over
+    if (timer != null) {  // only moves if not paused || game over
       if(i.keyCode === 37) {
         moveLeft();
       } else if(i.keyCode === 39) {
@@ -122,32 +122,41 @@ document.addEventListener('DOMContentLoaded', () => {
     draw();
   }
 
+  function atLeft() {
+    return currentTetromino.some(index => (currentPosition + index) % width === width -1);
+  } 
+  function atRight() {
+    return currentTetromino.some(index => (currentPosition + index) % width === 0);
+  } 
+  
+  function checkRotation(P){
+    if (P % width < 3) {   //add 1 because the position index can be 1 less than where the piece is (with how they are indexed).     
+      if (atLeft()) { 
+      currentPosition -= 1;     //use actual position to check if it's flipped over to right side
+      checkRotation(P)   // Pass position from start, since long block might need to move more.
+    }
+    }
+    else if (P % width > 6) {
+      if (atRight()){
+        currentPosition -= 1;
+        checkRotation(P)
+      }
+    }
+  }
+  
   // rotate the tetromino
   function rotateTetromino() {
     undraw();
     currentRotation++
-
-    // // rotation must respect the edges limits
-    // const atLeftEdge = currentTetromino.some(index => (currentPosition + index) % width === 0);
-    // const atRightEdge = currentTetromino.some(index => (currentPosition + index) % width === width -1);
-    
-    // if(!atRightEdge && !atLeftEdge) currentRotation++;
-
-    // if (atLeftEdge) { 
-    //   currentPosition +=1; 
-    //   currentRotation++;
-    // } else if (atRightEdge) {
-    //   currentPosition -=1; 
-    //   currentRotation++;
-    // }
-
     // resets to default rotaion after fourth one
     if(currentRotation === currentTetromino.length) {
       currentRotation = 0;
     } 
     currentTetromino = tetrominos[randomTetromino][currentRotation];
+    checkRotation(currentPosition);
     draw();
   }
+
 
   // freeze the tetromino
   function freeze() {
