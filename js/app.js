@@ -8,15 +8,15 @@ document.addEventListener('DOMContentLoaded', () => {
   let score = 0;
   let timer; // null value by default
   
-  // tetromino colors
+  // tetromino colors (change to sass later)
   const colors = [
-    'orange',
-    'navy',
-    'green',
-    'red',
-    'purple',
-    'yellow',
-    'blue'
+    '#F0A133',
+    '#2E5BD8',
+    '#7DE71D',
+    '#ED4631',
+    '#A86FF0',
+    '#EFED35',
+    '#6AF1F1'
   ]
 
   // Tetrominos
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     [width+2, width*2, width*2+1, width*2+2],
     [width*2+2, 1, width+1, width*2+1],
     [width, width+1, width+2, width*2],
-    [1, 2, width+2, width*2+2]
+    [0, 1, width+1, width*2+1]
   ] 
 
   const sTetromino = [
@@ -63,15 +63,15 @@ document.addEventListener('DOMContentLoaded', () => {
   ]
   
   const iTetromino = [
-    [width, width+1, width+2, width+3],
+    [0, 1, 2, 3],
     [1, width+1, width*2+1, width*3+1],
-    [width, width+1, width+2, width+3],
+    [0, 1, 2, 3],
     [1, width+1, width*2+1, width*3+1]
   ]
 
   const tetrominos = [jTetromino, lTetromino, sTetromino, zTetromino, tTetromino, oTetromino, iTetromino]
 
-  let currentPosition = 4; // default position
+  let currentPosition = 14; // default position
   let currentRotation = 0; // default rotation
 
   // select a random Tetromino in its default rotation
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // drawing the tetromino
   function draw() {
-    currentTetromino.forEach(index =>{
+    currentTetromino.forEach(index => {
       squares[currentPosition + index].classList.add('tetromino');
       squares[currentPosition + index].style.backgroundColor = colors[randomTetromino];
     })
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // undrawing the tetromino
   function undraw() {
-    currentTetromino.forEach(index =>{
+    currentTetromino.forEach(index => {
       squares[currentPosition + index].classList.remove('tetromino');
       squares[currentPosition + index].style.backgroundColor = '';
     })
@@ -99,36 +99,58 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // assign functions to inputs
   function input(i) {
-    if(i.keyCode === 37) {
-      moveLeft();
-    } else if(i.keyCode === 39) {
-      moveRight();
-    } else if(i.keyCode === 38) {
-      rotateTetromino();
-    } else if(i.keyCode === 40) {
-      moveDown();
+    if (timer != null) {  // only moves if not paused || game over
+      if(i.keyCode === 37) {
+        moveLeft();
+      } else if(i.keyCode === 39) {
+        moveRight();
+      } else if(i.keyCode === 38) {
+        rotateTetromino();
+      } else if(i.keyCode === 40) {
+        moveDown();
+      }
     }
   }
-  document.addEventListener('keyup', input);
-
+  // keydown = you can hold the down btn 
+  document.addEventListener('keydown', input);
 
   // move down the tetromino
   function moveDown() {
+    freeze();
     undraw();
     currentPosition += width;
     draw();
-    freeze();
   }
 
+  // bug fix: out of bounds rotation
+  function checkRotatedPosition(P){
+    function entersRightSide() { return currentTetromino.some(index=> (currentPosition + index + 1) % width === 0)  }
+    function entersLeftSide() { return currentTetromino.some(index=> (currentPosition + index) % width === 0) }
+    
+    if ((P + 1) % width < 4) {       //adds 1 because the position can be 1 less than where the tetromino is (with how they are indexed).     
+      if (entersRightSide()) {    // checks 
+        currentPosition += 1;    // move back
+        checkRotatedPosition(P); // repeat until it's inside its bounds (iTetromino will need to move back more than once)
+        }
+    }
+    else if (P % width > 5) { // iTetromino (biggest) touches right border at position 6 ; 3 if left border
+      if (entersLeftSide()) {
+        currentPosition -= 1;
+      checkRotatedPosition(P);
+      }
+    }
+  }
+  
   // rotate the tetromino
   function rotateTetromino() {
     undraw();
-    currentRotation++;
+    currentRotation++
     // resets to default rotaion after fourth one
     if(currentRotation === currentTetromino.length) {
       currentRotation = 0;
-    }
+    } 
     currentTetromino = tetrominos[randomTetromino][currentRotation];
+    checkRotatedPosition(currentPosition);
     draw();
   }
 
@@ -137,16 +159,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // The some() method tests whether at least one element in the array passes the test
     if(currentTetromino.some(index => squares[currentPosition + index + width].classList.contains('taken'))) {
       currentTetromino.forEach(index => squares[currentPosition + index].classList.add('taken'));
+      // currentTetromino.forEach(index => squares[currentPosition + index].style.backgroundColor = '#9ACD32'); // change to darker color 
+      frozen.play();
       // make a new tetromino fall
       randomTetromino = nextRandom;
       nextRandom = Math.floor(Math.random() * tetrominos.length);
       currentRotation = 0; // default
       currentTetromino = tetrominos[randomTetromino][currentRotation];
       currentPosition = 4; // default
-      draw();
+      gameOver();
+      // draw(); // bug fix ; duplicate tetromino after cleared line
       displayTetromino();
       increaseScore();
-      gameOver();
     }
   }
 
@@ -213,12 +237,16 @@ document.addEventListener('DOMContentLoaded', () => {
   startBtn.addEventListener('click', () => {
     // if time value isn't null >> pause
     if (timer) {
+      startBtn.innerHTML = 'Resume';
       clearInterval(timer);
       timer = null;
+      playTheme.pause();
     } else {
+      startBtn.innerHTML = 'Pause';
+      playTheme.play();
       draw();
       timer = setInterval(moveDown, 1000);
-      nextRandom = Math.floor(Math.random()*tetrominos.length);
+      // nextRandom = Math.floor(Math.random()*tetrominos.length); // bug fix ; start/pause btn was changing next tetromino
       displayTetromino();
     }
   })
@@ -237,6 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
           squares[index].classList.remove('taken');
           squares[index].classList.remove('tetromino');
           squares[index].style.backgroundColor = '';
+          clearLine.play();
         })
         const squaresRemoved = squares.splice(i, width);
         squares = squaresRemoved.concat(squares);
@@ -249,7 +278,12 @@ document.addEventListener('DOMContentLoaded', () => {
   function gameOver() {
     if(currentTetromino.some(index => squares[currentPosition + index].classList.contains('taken'))) {
       scoreDisplay.innerHTML = 'Game Over';
+      startBtn.innerHTML = 'Restart';
       clearInterval(timer);
+      timer = null;
+      playTheme.pause();
+      playTheme.currentTime = 0; // resets theme
+      gameOvr.play();
     }
   }
 
