@@ -50,7 +50,8 @@
 }
 
 body {
-  background-image: url(/img/small-bg.jpg);
+  background-image: url(../img/small-bg.jpg);
   background-size: 100vw 100vh;
   background-repeat: no-repeat;
+  color: #fff !important;
 }
