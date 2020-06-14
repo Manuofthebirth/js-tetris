@@ -17,15 +17,17 @@
   <script>let lvUp = new Audio('audio/lv-up.mp3');</script>
   <script src="https://kit.fontawesome.com/94ae24f438.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  
-  <title>JS Tetris</title>
+  <script>
+    document.querySelector('i').addEventListener('touchstart', gameOvr.play());
+  </script>
+  <title>Tetris</title>
 </head>
 <body>
   <header>
-    <h1 style="text-align: center; margin-top: 20px;">Tetris</h1>
+    <h1 class="logo">Tetris</h1>
   </header>
   <main>
-    <h3 class="score-text" style="text-align: center;">Lines: <span class="score-num">0</span></h3>
+    <h3 class="score-text">Lines: <span class="score-num">0</span></h3>
     
     <div class="container-fluid">
       <div class="game-grid">
@@ -263,11 +265,27 @@
 
         <button class="start-btn btn btn-light">Start</button>
 
-        <div class="commands">
-          <i ontouchstart="rotateTetromino()" class="fas fa-arrow-circle-up fa-3x"></i>
-          <i ontouchstart="moveRight()" class="fas fa-arrow-circle-right fa-3x"></i>
-          <i ontouchstart="moveDown()" class="fas fa-arrow-circle-down fa-3x"></i>
-          <i ontouchstart="moveLeft()" class="fas fa-arrow-circle-left fa-3x"></i>
+        <div class="commands container-fluid">
+          <div class="row">
+            <div class="col-12">
+              <button class="command up btn btn-light" id="up">&#8679;</button>
+            </div>
+            <div class="row">
+              <div class="col-6 inline-btn">
+                <button class="command left btn btn-light" id="left">&#8678;</button>
+              </div>
+              <div class="col-6 inline-btn">
+                <button class="command right btn btn-light" id="right">&#8680;</button>
+              </div>
+            </div> 
+            <div class="col-12">
+              <button class="command down btn btn-light" id="down">&#8681;</button>
+            </div>
+          </div>
+          <!-- <i class="command fas fa-arrow-circle-up fa-3x"></i>
+          <i class="command fas fa-arrow-circle-right fa-3x"></i>
+          <i class="command fas fa-arrow-circle-left fa-3x"></i>
+          <i class="command fas fa-arrow-circle-down fa-3x"></i> -->
         </div>
       </div>
   </main>
