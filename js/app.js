@@ -111,6 +111,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   }
+  // touch events (mobile)
+  document.querySelector('fa-arrow-circle-up').addEventListener('touchstart', rotateTetromino());
+  document.querySelector('fa-arrow-circle-right').addEventListener('touchstart', moveRight());
+  document.querySelector('fa-arrow-circle-left').addEventListener('touchstart', moveLeft());
+  document.querySelector('fa-arrow-circle-down').addEventListener('touchstart', moveDown());
+
   // keydown = you can hold the down btn 
   document.addEventListener('keydown', input);
 
