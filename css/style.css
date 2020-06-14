@@ -1,15 +1,22 @@
 .commands {
-  margin-top: 30px;
+  margin-top: 10px;
 }
 
-.command {
-  padding-top: 5px;
+.commands .command {
+  border-radius: 50%;
+  font-size: 20px !important;
+  margin-top: 5px;
+  background-color: #993558;
+  color: #fff;
+}
+
+.commands .inline-btn {
+  padding-left: 5px;
 }
 
 .container-fluid {
   display: flex;
   justify-content: center;
-  margin-top: 50px;
 }
 
 .display-next-grid {
@@ -27,6 +34,16 @@
   flex-wrap: wrap;
   height: 400px;
   width: 200px;
+}
+
+.logo {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.score-text {
+  text-align: center;
+  margin-bottom: 50px;
 }
 
 .square {

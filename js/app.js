@@ -111,7 +111,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   }
-
   // keydown = you can hold the down btn 
   document.addEventListener('keydown', input);
 
@@ -288,4 +287,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // mobile commands >> change later
+  const up = document.querySelector('#up')
+  const left = document.querySelector('#left')
+  const right = document.querySelector('#right')
+  const down = document.querySelector('#down')
+  up.addEventListener('click', () => { rotateTetromino(); })
+  left.addEventListener('click', () => { moveLeft(); })
+  right.addEventListener('click', () => { moveRight(); })
+  down.addEventListener('click', () => { moveDown(); })
 })
