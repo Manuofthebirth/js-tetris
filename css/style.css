@@ -51,4 +51,5 @@ body {
   background-size: 100vh;
   background-repeat: no-repeat;
   color: #fff !important;
+  background-image: url(/img/small-bg.jpg);
 }
