@@ -15,19 +15,18 @@
   <script>let frozen = new Audio('audio/taken.mp3');</script>
   <script>let atEdge = new Audio('audio/edge.mp3');</script>
   <script>let lvUp = new Audio('audio/lv-up.mp3');</script>
-  <!-- Bootstrap CSS -->
+  <script src="https://kit.fontawesome.com/94ae24f438.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   
   <title>JS Tetris</title>
 </head>
 <body>
   <header>
-    <h1>Tetris</h1>
+    <h1 style="text-align: center; margin-top: 20px;">Tetris</h1>
   </header>
   <main>
-    <h3 class="score-text">Lines: <span class="score-num">0</span></h3>
-    <button class="start-btn">Start</button>
-
+    <h3 class="score-text" style="text-align: center;">Lines: <span class="score-num">0</span></h3>
+    
     <div class="container-fluid">
       <div class="game-grid">
         <!-- # 20h x 10w -->
@@ -243,7 +242,7 @@
         <div class="taken"></div>
         <div class="taken"></div>
       </div>
-
+      
       <div class="display-next-grid">
         <div class="square"></div>
         <div class="square"></div>
@@ -261,8 +260,16 @@
         <div class="square"></div>
         <div class="square"></div>
         <div class="square"></div>
+
+        <button class="start-btn btn btn-light">Start</button>
+
+        <div class="commands">
+          <i ontouchstart="rotateTetromino()" class="fas fa-arrow-circle-up fa-3x"></i>
+          <i ontouchstart="moveRight()" class="fas fa-arrow-circle-right fa-3x"></i>
+          <i ontouchstart="moveDown()" class="fas fa-arrow-circle-down fa-3x"></i>
+          <i ontouchstart="moveLeft()" class="fas fa-arrow-circle-left fa-3x"></i>
+        </div>
       </div>
-    </div>
   </main>
 </body>
 </html>
