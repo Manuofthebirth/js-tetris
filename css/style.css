@@ -1,5 +1,5 @@
 .commands {
-  margin-top: 10px;
+  margin-top: 25px;
 }
 
 .commands .command {
@@ -17,6 +17,10 @@
 .container-fluid {
   display: flex;
   justify-content: center;
+}
+
+.disabled {
+  pointer-events: none;
 }
 
 .display-next-grid {

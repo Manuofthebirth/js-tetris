@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let squares = Array.from(document.querySelectorAll('.game-grid div')); // select all divs in game grid
   const scoreDisplay = document.querySelector('.score-num');
   const startBtn = document.querySelector('.start-btn');
+  const mobileBtns = document.querySelectorAll('.commands');
   const width = 10;
   let nextRandom = 0;
   let score = 0;
@@ -241,6 +242,9 @@ document.addEventListener('DOMContentLoaded', () => {
       clearInterval(timer);
       timer = null;
       playTheme.pause();
+      mobileBtns.forEach(btn => {
+        btn.classList.add('disabled');
+      })
     } else {
       startBtn.innerHTML = 'Pause';
       playTheme.play();
@@ -248,6 +252,9 @@ document.addEventListener('DOMContentLoaded', () => {
       timer = setInterval(moveDown, 1000);
       // nextRandom = Math.floor(Math.random()*tetrominos.length); // bug fix ; start/pause btn was changing next tetromino
       displayTetromino();
+      mobileBtns.forEach(btn => {
+        btn.classList.remove('disabled');
+      })
     }
   })
 
@@ -292,6 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const left = document.querySelector('#left')
   const right = document.querySelector('#right')
   const down = document.querySelector('#down')
+
   up.addEventListener('click', () => { rotateTetromino(); })
   left.addEventListener('click', () => { moveLeft(); })
   right.addEventListener('click', () => { moveRight(); })
