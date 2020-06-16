@@ -2,11 +2,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const grid = document.querySelector('.game-grid');
   let squares = Array.from(document.querySelectorAll('.game-grid div')); // select all divs in game grid
   const scoreDisplay = document.querySelector('.score-num');
+  const levelDisplay = document.querySelector('.level-num');
   const startBtn = document.querySelector('.start-btn');
   const mobileBtns = document.querySelectorAll('.commands');
   const width = 10;
   let nextRandom = 0;
   let score = 0;
+  let level = 1;
   let timer; // null value by default
   
   // tetromino colors (change to sass later)
@@ -268,12 +270,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // increase score, remove then replace line taken
         score++;
         scoreDisplay.innerHTML = score;
+        if (score % width === 0) {
+          level++;
+          levelDisplay.innerHTML = level;
+        }
         gridRow.forEach(index =>{
           squares[index].classList.remove('taken');
           squares[index].classList.remove('tetromino');
           squares[index].style.backgroundColor = '';
           clearLine.play();
-        })
+        }) 
         const squaresRemoved = squares.splice(i, width);
         squares = squaresRemoved.concat(squares);
         squares.forEach(line => grid.appendChild(line));
