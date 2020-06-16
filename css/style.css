@@ -17,12 +17,12 @@
 .container-fluid {
   display: flex;
   justify-content: center;
+  margin-top: 15px;
 }
 
 .counter {
   display: flex;
   justify-content: space-evenly;
-  margin-bottom: 35px;
 }
 
 .disabled {
@@ -44,6 +44,10 @@
   flex-wrap: wrap;
   height: 400px;
   width: 200px;
+}
+
+.gameover-text {
+  text-align: center;
 }
 
 .logo {
