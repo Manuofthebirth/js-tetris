@@ -2,11 +2,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const grid = document.querySelector('.game-grid');
   let squares = Array.from(document.querySelectorAll('.game-grid div')); // select all divs in game grid
   const scoreDisplay = document.querySelector('.score-num');
+  const levelDisplay = document.querySelector('.level-num');
   const startBtn = document.querySelector('.start-btn');
   const mobileBtns = document.querySelectorAll('.commands');
   const width = 10;
   let nextRandom = 0;
   let score = 0;
+  let level = 1;
   let timer; // null value by default
   
   // tetromino colors (change to sass later)
@@ -249,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
       startBtn.innerHTML = 'Pause';
       playTheme.play();
       draw();
-      timer = setInterval(moveDown, 1000);
+      timer = setInterval(moveDown, 1100-100*level); // tetrominos drop 0.1 seconds faster after each lv
       // nextRandom = Math.floor(Math.random()*tetrominos.length); // bug fix ; start/pause btn was changing next tetromino
       displayTetromino();
       mobileBtns.forEach(btn => {
@@ -262,21 +264,28 @@ document.addEventListener('DOMContentLoaded', () => {
   function increaseScore() {
     for (let i=0; i < 199; i+=width) {
       const gridRow = [i, i+1, i+2, i+3, i+4, i+5, i+6, i+7, i+8, i+9] 
-
+      
       // check if every square in a row is taken (remove line(s) if true)
       if(gridRow.every(index => squares[index].classList.contains('taken'))) {
         // increase score, remove then replace line taken
         score++;
         scoreDisplay.innerHTML = score;
+        if (score % width === 0 && score < 11) {
+          level++;
+          levelDisplay.innerHTML = level;
+          lvUp.play()
+        }
         gridRow.forEach(index =>{
           squares[index].classList.remove('taken');
           squares[index].classList.remove('tetromino');
           squares[index].style.backgroundColor = '';
           clearLine.play();
-        })
+        }) 
         const squaresRemoved = squares.splice(i, width);
         squares = squaresRemoved.concat(squares);
         squares.forEach(line => grid.appendChild(line));
+        clearInterval(timer); 
+        timer = setInterval(moveDown, 1100-100*level); // triggers faster movement after 10 lines
       }
     }
   }
