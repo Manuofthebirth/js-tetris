@@ -251,6 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
       startBtn.innerHTML = 'Pause';
       playTheme.play();
       draw();
+      clearInterval(timer); 
       timer = setInterval(moveDown, 1100-100*level); // tetrominos drop 0.1 seconds faster after each lv
       // nextRandom = Math.floor(Math.random()*tetrominos.length); // bug fix ; start/pause btn was changing next tetromino
       displayTetromino();
