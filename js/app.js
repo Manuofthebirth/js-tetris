@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let nextRandom = 0;
   let score = 0;
   let level = 1;
+  let lose = false;
   let timer; // null value by default
   
   // tetromino colors (change to sass later)
@@ -249,6 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.classList.add('disabled');
       })
     } else {
+      if (lose) { location.reload(); } // checks for game over
       startBtn.innerHTML = 'Pause';
       playTheme.play();
       draw();
@@ -296,12 +298,13 @@ document.addEventListener('DOMContentLoaded', () => {
   function gameOver() {
     if(currentTetromino.some(index => squares[currentPosition + index].classList.contains('taken'))) {
       gameOverDisplay.innerHTML = 'Game Over';
-      startBtn.innerHTML = 'Restart';
+      startBtn.innerHTML = 'Reload';
       clearInterval(timer);
       timer = null;
       playTheme.pause();
       playTheme.currentTime = 0; // resets theme
       gameOvr.play();
+      lose = true;
     }
   }
 
