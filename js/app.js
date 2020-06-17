@@ -274,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // increase score, remove then replace line taken
         score++;
         scoreDisplay.innerHTML = score;
-        if (score % width === 0 && level < 11) {
+        if (score % width === 0 && level < 10) {
           level++;
           levelDisplay.innerHTML = level;
           lvUp.play()
