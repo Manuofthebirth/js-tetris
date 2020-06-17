@@ -5,12 +5,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const levelDisplay = document.querySelector('.level-num');
   const gameOverDisplay = document.querySelector('.gameover-text');
   const startBtn = document.querySelector('.start-btn');
+  const soundBtn = document.querySelector('.music-btn');
   const mobileBtns = document.querySelectorAll('.commands');
   const width = 10;
   let nextRandom = 0;
   let score = 0;
   let level = 1;
   let lose = false;
+  let soundOn = true;
   let timer; // null value by default
   
   // tetromino colors (change to sass later)
@@ -165,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if(currentTetromino.some(index => squares[currentPosition + index + width].classList.contains('taken'))) {
       currentTetromino.forEach(index => squares[currentPosition + index].classList.add('taken'));
       // currentTetromino.forEach(index => squares[currentPosition + index].style.backgroundColor = '#9ACD32'); // change to darker color 
-      frozen.play();
+      if (soundOn) {frozen.play();}
       // make a new tetromino fall
       randomTetromino = nextRandom;
       nextRandom = Math.floor(Math.random() * tetrominos.length);
@@ -252,7 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       if (lose) { location.reload(); } // checks for game over
       startBtn.innerHTML = 'Pause';
-      playTheme.play();
+      if (soundOn) { playTheme.play(); }
       draw();
       clearInterval(timer); 
       timer = setInterval(moveDown, 1100-100*level); // tetrominos drop 0.1 seconds faster after each lv
@@ -274,16 +276,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // increase score, remove then replace line taken
         score++;
         scoreDisplay.innerHTML = score;
-        if (score % width === 0 && level < 10) {
+        if (score % width === 0 && level < 9) {
           level++;
           levelDisplay.innerHTML = level;
-          lvUp.play()
+          if (soundOn) { lvUp.play(); }
         }
         gridRow.forEach(index =>{
           squares[index].classList.remove('taken');
           squares[index].classList.remove('tetromino');
           squares[index].style.backgroundColor = '';
-          clearLine.play();
+          if (soundOn) { clearLine.play(); }
         }) 
         const squaresRemoved = squares.splice(i, width);
         squares = squaresRemoved.concat(squares);
@@ -303,7 +305,7 @@ document.addEventListener('DOMContentLoaded', () => {
       timer = null;
       playTheme.pause();
       playTheme.currentTime = 0; // resets theme
-      gameOvr.play();
+      if (soundOn) { gameOvr.play(); }
       lose = true;
     }
   }
@@ -318,4 +320,18 @@ document.addEventListener('DOMContentLoaded', () => {
   left.addEventListener('click', () => { moveLeft(); })
   right.addEventListener('click', () => { moveRight(); })
   down.addEventListener('click', () => { moveDown(); })
+
+  soundBtn.addEventListener('click', () => {
+    if (soundOn) {
+      soundOn = false;
+      soundBtn.innerHTML = 'Unmute';
+      playTheme.pause();
+    } else {
+      soundOn = true;
+      soundBtn.innerHTML = 'Mute';
+      if (timer) {
+        playTheme.play();
+      } else { playTheme.pause(); }  // keep sound off when paused
+    }
+  })
 })

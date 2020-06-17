@@ -60,8 +60,8 @@
   width: 20px;
 }
 
-.start-btn {
-  margin-top: 30px;
+.start-btn, .music-btn {
+  margin-top: 20px;
   width: 80px;
 }
 
