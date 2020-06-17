@@ -38,6 +38,10 @@
   width: 80px;
 }
 
+.fa-volume-up, .fa-volume-mute {
+  color: #993558;
+}
+
 .game-grid {
   background-color: #C8C7A8;
   display: flex;

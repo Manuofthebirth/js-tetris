@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const gameOverDisplay = document.querySelector('.gameover-text');
   const startBtn = document.querySelector('.start-btn');
   const soundBtn = document.querySelector('.music-btn');
+  const soundIcon = document.querySelector('.fa-volume-mute');
   const mobileBtns = document.querySelectorAll('.commands');
   const width = 10;
   let nextRandom = 0;
@@ -324,11 +325,13 @@ document.addEventListener('DOMContentLoaded', () => {
   soundBtn.addEventListener('click', () => {
     if (soundOn) {
       soundOn = false;
-      soundBtn.innerHTML = 'Unmute';
+      soundIcon.classList.remove("fa-volume-mute");
+      soundIcon.classList.add("fa-volume-up");
       playTheme.pause();
     } else {
       soundOn = true;
-      soundBtn.innerHTML = 'Mute';
+      soundIcon.classList.remove("fa-volume-up");
+      soundIcon.classList.add("fa-volume-mute");
       if (timer) {
         playTheme.play();
       } else { playTheme.pause(); }  // keep sound off when paused
