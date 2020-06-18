@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let squares = Array.from(document.querySelectorAll('.game-grid div')); // select all divs in game grid
   const scoreDisplay = document.querySelector('.score-num');
   const levelDisplay = document.querySelector('.level-num');
-  const gameOverDisplay = document.querySelector('.gameover-text');
+  const logoDisplay = document.querySelector('.logo');
   const startBtn = document.querySelector('.start-btn');
   const soundBtn = document.querySelector('.music-btn');
   const soundIcon = document.querySelector('.fa-volume-mute');
@@ -300,7 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // game over >> when a tetromino in the default position overwrites another
   function gameOver() {
     if(currentTetromino.some(index => squares[currentPosition + index].classList.contains('taken'))) {
-      gameOverDisplay.innerHTML = 'Game Over';
+      logoDisplay.innerHTML = 'GAME OVER';
       startBtn.innerHTML = 'Reload';
       clearInterval(timer);
       timer = null;

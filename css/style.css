@@ -50,14 +50,11 @@
   width: 200px;
 }
 
-.gameover-text {
-  text-align: center;
-}
-
 .logo {
   font-size: 4.5rem;
   margin-bottom: 0px;
   text-align: center;
+  max-width: 100vw !important;
 }
 
 .square {
@@ -78,6 +75,7 @@
 .text {
   font-size: 2.5rem;
   margin-bottom: 0px;
+  margin-bottom: 5px;
 }
 
 * {
