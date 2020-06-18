@@ -245,7 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
   startBtn.addEventListener('click', () => {
     // if time value isn't null >> pause
     if (timer) {
-      startBtn.innerHTML = 'Resume';
+      startBtn.innerHTML = 'RESUME';
       clearInterval(timer);
       timer = null;
       playTheme.pause();
@@ -254,7 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
       })
     } else {
       if (lose) { location.reload(); } // checks for game over
-      startBtn.innerHTML = 'Pause';
+      startBtn.innerHTML = 'PAUSE';
       if (soundOn) { playTheme.play(); }
       draw();
       clearInterval(timer); 
@@ -301,7 +301,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function gameOver() {
     if(currentTetromino.some(index => squares[currentPosition + index].classList.contains('taken'))) {
       logoDisplay.innerHTML = 'GAME OVER';
-      startBtn.innerHTML = 'Reload';
+      startBtn.innerHTML = 'RELOAD';
       clearInterval(timer);
       timer = null;
       playTheme.pause();
