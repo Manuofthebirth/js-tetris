@@ -1,10 +1,15 @@
+@font-face {
+  font-family: 'Tetrix';
+  src: local("Tetrix"), url("../font/tetrix.ttf") format("opentype");
+}
+
 .commands {
   margin-top: 25px;
 }
 
 .commands .command {
   border-radius: 50%;
-  font-size: 20px !important;
+  font-size: 20px;
   margin-top: 5px;
   background-color: #993558;
   color: #fff;
@@ -17,7 +22,6 @@
 .container-fluid {
   display: flex;
   justify-content: center;
-  margin-top: 15px;
 }
 
 .counter {
@@ -38,10 +42,6 @@
   width: 80px;
 }
 
-.fa-volume-up, .fa-volume-mute {
-  color: #993558;
-}
-
 .game-grid {
   background-color: #C8C7A8;
   display: flex;
@@ -57,6 +57,7 @@
 .logo {
   text-align: center;
   margin-top: 20px;
+  font-size: 4.5rem;
 }
 
 .square {
@@ -67,10 +68,15 @@
 .start-btn, .music-btn {
   margin-top: 20px;
   width: 80px;
+  color: #993558 !important;
 }
 
 .tetromino {
   border-style: outset;
+}
+
+.text {
+  font-size: 2.5rem;
 }
 
 * {
@@ -84,4 +90,5 @@ body {
   background-size: 100vw 100vh;
   background-repeat: no-repeat;
   color: #fff !important;
+  font-family: 'Tetrix', sans-serif !important;
 }
