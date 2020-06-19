@@ -3,6 +3,11 @@
   src: local("Tetrix"), url("../font/tetrix.ttf") format("opentype");
 }
 
+@font-face {
+  font-family: 'ModernTetris';
+  src: local("ModernTetris"), url("../font/modern-tetris/modern-tetris.ttf") format("opentype");
+}
+
 .commands {
   margin-top: 25px;
 }
@@ -78,6 +83,22 @@
   margin-bottom: 0px;
   margin-bottom: 10px;
   text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+@media (min-width: 1200px) {
+  .logo {
+    font-family: "ModernTetris", sans !important;
+    background-image: linear-gradient(#ED5354, #FCC337);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 7.5rem;
+    margin-top: 35px;
+    margin-bottom: 20px;
+    text-shadow: none;
+  }
+  .text {
+    font-size: 3rem;
+  }
 }
 
 * {
