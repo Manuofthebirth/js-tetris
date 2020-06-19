@@ -305,7 +305,7 @@ document.addEventListener('DOMContentLoaded', () => {
       clearInterval(timer);
       timer = null;
       playTheme.pause();
-      playTheme.currentTime = 0; // resets theme
+      // playTheme.currentTime = 0; // resets theme
       if (soundOn) { gameOvr.play(); }
       lose = true;
     }
