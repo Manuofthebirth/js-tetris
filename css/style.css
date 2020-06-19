@@ -88,6 +88,7 @@
 @media (min-width: 1200px) {
   .logo {
     font-family: "ModernTetris", sans !important;
+    background-clip: text;
     background-image: linear-gradient(#ED5354, #FCC337);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
