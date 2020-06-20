@@ -218,12 +218,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // tetrominos at default rotation
   const nextTetrominos = [
-    [displayWidth, displayWidth*2, displayWidth*2+1, displayWidth*2+2], // jTetromino
-    [displayWidth+2, displayWidth*2, displayWidth*2+1, displayWidth*2+2], //lTetromino
-    [displayWidth+1, displayWidth, 1, 2], // sTetromino
-    [displayWidth+2, displayWidth+1, 0, 1], // zTetromino
+    [0, displayWidth, displayWidth+1, displayWidth+2], // jTetromino
+    [3, displayWidth+1, displayWidth+2, displayWidth+3], //lTetromino
+    [2, 3, displayWidth+1, displayWidth+2], // sTetromino
+    [0, 1, displayWidth+1, displayWidth+2], // zTetromino
     [1, displayWidth, displayWidth+1, displayWidth+2], //tTetromino
-    [0, 1, displayWidth, displayWidth+1], //oTetromino
+    [1, 2, displayWidth+1, displayWidth+2], //oTetromino
     [displayWidth, displayWidth+1, displayWidth+2, displayWidth+3] // iTetromino
   ]
 
