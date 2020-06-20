@@ -105,7 +105,7 @@
   background-image: linear-gradient(#ED5354, #FCC337);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  -webkit-text-stroke: 2px #7AC83E;
+  -webkit-text-stroke: 1.4px #7AC83E;
   line-height: unset;
   margin-top: 25px;
   margin-bottom: 5px;
@@ -125,6 +125,9 @@
   .tools {
     margin-left: 10px;
   }
+  .logo {
+    -webkit-text-stroke: 1.2px #7AC83E;
+  }
 }
 
 @media (min-width: 768px) {
@@ -134,13 +137,14 @@
     background-image: linear-gradient(#ED5354, #FCC337);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 2px #7AC83E;
+    -webkit-text-stroke: 1.4px #7AC83E;
     line-height: unset;
     margin-top: 25px;
     margin-bottom: 5px;
     text-align: center;
     text-shadow: none;
     font-size: 9.5vw;
+    -webkit-text-stroke: 2.4px #7AC83E;
   }
   .text {
     font-size: 5vw;
@@ -154,13 +158,14 @@
     background-image: linear-gradient(#ED5354, #FCC337);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 2px #7AC83E;
+    -webkit-text-stroke: 1.4px #7AC83E;
     line-height: unset;
     margin-top: 25px;
     margin-bottom: 5px;
     text-align: center;
     text-shadow: none;
     font-size: 6.5vw;
+    -webkit-text-stroke: 3px #7AC83E;
   }
   .text {
     font-size: 3vw;
