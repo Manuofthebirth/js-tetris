@@ -305,7 +305,6 @@ document.addEventListener('DOMContentLoaded', () => {
       clearInterval(timer);
       timer = null;
       playTheme.pause();
-      // playTheme.currentTime = 0; // resets theme
       if (soundOn) { gameOvr.play(); }
       lose = true;
     }
@@ -316,7 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const left = document.querySelector('#left')
   const right = document.querySelector('#right')
   const down = document.querySelector('#down')
-
+  
   up.addEventListener('click', () => { rotateTetromino(); })
   left.addEventListener('click', () => { moveLeft(); })
   right.addEventListener('click', () => { moveRight(); })
