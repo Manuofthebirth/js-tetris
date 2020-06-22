@@ -184,4 +184,7 @@ body {
   background-repeat: no-repeat;
   color: #fff !important;
   font-family: 'Tetrix', sans-serif !important;
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
 }
