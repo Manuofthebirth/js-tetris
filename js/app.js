@@ -17,11 +17,16 @@ document.addEventListener('DOMContentLoaded', () => {
   let timer; // null value by default
 
   // mobile commands >> change later
-  const up = document.querySelector('#up')
+  let upPressed = false;
+  let leftPressed = false;
+  let rightPressed = false;
+  let downPressed = false;
+
+  const up = document.getElementById('up')
   const left = document.querySelector('#left')
   const right = document.querySelector('#right')
   const down = document.querySelector('#down')
-  
+
   function lockMobile() {
     mobileBtns.forEach(btn => {
       btn.classList.add('disabled');
@@ -34,10 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
-  up.addEventListener('click', () => { rotateTetromino(); })
-  left.addEventListener('click', () => { moveLeft(); })
-  right.addEventListener('click', () => { moveRight(); })
-  down.addEventListener('click', () => { moveDown(); })
+  up.addEventListener('mousedown', () => { rotateTetromino(); })
+  left.addEventListener('mousedown', () => { moveLeft(); })
+  right.addEventListener('mousedown', () => { moveRight(); })
+  down.addEventListener('mousedown', () => { moveDown(); })
   
   // disable by default (otherwise clickable before game start)
   lockMobile();
