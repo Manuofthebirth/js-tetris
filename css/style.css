@@ -18,6 +18,7 @@
   margin-top: 5px;
   background: linear-gradient(#993558, #55071eef);
   color: #fff;
+  touch-action: manipulation;
 }
 
 .commands .center-btn {
