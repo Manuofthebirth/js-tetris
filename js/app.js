@@ -15,6 +15,32 @@ document.addEventListener('DOMContentLoaded', () => {
   let lose = false;
   let soundOn = true;
   let timer; // null value by default
+
+  // mobile commands >> change later
+  const up = document.querySelector('#up')
+  const left = document.querySelector('#left')
+  const right = document.querySelector('#right')
+  const down = document.querySelector('#down')
+  
+  function lockMobile() {
+    mobileBtns.forEach(btn => {
+      btn.classList.add('disabled');
+    })
+  }
+
+  function unlockMobile() {
+    mobileBtns.forEach(btn => {
+      btn.classList.remove('disabled');
+    })
+  }
+
+  up.addEventListener('click', () => { rotateTetromino(); })
+  left.addEventListener('click', () => { moveLeft(); })
+  right.addEventListener('click', () => { moveRight(); })
+  down.addEventListener('click', () => { moveDown(); })
+  
+  // disable by default (otherwise clickable before game start)
+  lockMobile();
   
   // tetromino colors (change to sass later)
   const colors = [
@@ -249,9 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
       clearInterval(timer);
       timer = null;
       playTheme.pause();
-      mobileBtns.forEach(btn => {
-        btn.classList.add('disabled');
-      })
+      lockMobile();
     } else {
       if (lose) { location.reload(); } // checks for game over
       startBtn.innerHTML = 'PAUSE';
@@ -261,9 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
       timer = setInterval(moveDown, 1100-100*level); // tetrominos drop 0.1 seconds faster after each lv
       // nextRandom = Math.floor(Math.random()*tetrominos.length); // bug fix ; start/pause btn was changing next tetromino
       displayTetromino();
-      mobileBtns.forEach(btn => {
-        btn.classList.remove('disabled');
-      })
+      unlockMobile();
     }
   })
 
@@ -304,22 +326,12 @@ document.addEventListener('DOMContentLoaded', () => {
       startBtn.innerHTML = 'RELOAD';
       clearInterval(timer);
       timer = null;
+      lockMobile();
       playTheme.pause();
       if (soundOn) { gameOvr.play(); }
       lose = true;
     }
   }
-
-  // mobile commands >> change later
-  const up = document.querySelector('#up')
-  const left = document.querySelector('#left')
-  const right = document.querySelector('#right')
-  const down = document.querySelector('#down')
-  
-  up.addEventListener('click', () => { rotateTetromino(); })
-  left.addEventListener('click', () => { moveLeft(); })
-  right.addEventListener('click', () => { moveRight(); })
-  down.addEventListener('click', () => { moveDown(); })
 
   soundBtn.addEventListener('click', () => {
     if (soundOn) {
