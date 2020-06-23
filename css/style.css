@@ -189,4 +189,5 @@ body {
   background-repeat: no-repeat;
   color: #fff !important;
   font-family: 'Tetrix', sans-serif !important;
+  touch-action: none;
 }
