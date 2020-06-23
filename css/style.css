@@ -181,6 +181,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  touch-action: manipulation;
 }
 
 body {
@@ -189,5 +190,4 @@ body {
   background-repeat: no-repeat;
   color: #fff !important;
   font-family: 'Tetrix', sans-serif !important;
-  touch-action: manipulation;
 }
