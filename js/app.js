@@ -17,16 +17,11 @@ document.addEventListener('DOMContentLoaded', () => {
   let timer; // null value by default
 
   // mobile commands >> change later
-  let upPressed = false;
-  let leftPressed = false;
-  let rightPressed = false;
-  let downPressed = false;
-
-  const up = document.getElementById('up')
+  const up = document.querySelector('#up')
   const left = document.querySelector('#left')
   const right = document.querySelector('#right')
   const down = document.querySelector('#down')
-
+  
   function lockMobile() {
     mobileBtns.forEach(btn => {
       btn.classList.add('disabled');
