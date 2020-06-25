@@ -1,9 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const grid = document.querySelector('.game-grid');
   let squares = Array.from(document.querySelectorAll('.game-grid div')); // select all divs in game grid
-  // const animationText = document.querySelector('.animation-text');
-  // const scoreText = document.querySelector('.score-text');
-  // const levelText = document.querySelector('.level-text');
   const scoreDisplay = document.querySelector('.score-num');
   const levelDisplay = document.querySelector('.level-num');
   const logoDisplay = document.querySelector('.logo');
@@ -18,13 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let lose = false;
   let soundOn = true;
   let timer; // null value by default
-
-  // Press Start animation
-  // function pressStart() {
-  //   animationText.classList.toggle('hide');
-  // }
-
-  // animation = setInterval(pressStart, 700);
 
   // mobile commands >> change later
   const up = document.querySelector('#up')
@@ -44,10 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
-  up.addEventListener('mousedown', () => { rotateTetromino(); })
-  left.addEventListener('mousedown', () => { moveLeft(); })
-  right.addEventListener('mousedown', () => { moveRight(); })
-  down.addEventListener('mousedown', () => { moveDown(); })
+  up.addEventListener('click', () => { rotateTetromino(); })
+  left.addEventListener('click', () => { moveLeft(); })
+  right.addEventListener('click', () => { moveRight(); })
+  down.addEventListener('click', () => { moveDown(); })
   
   // disable by default (otherwise clickable before game start)
   lockMobile();
@@ -288,10 +278,6 @@ document.addEventListener('DOMContentLoaded', () => {
       lockMobile();
     } else {
       if (lose) { location.reload(); } // checks for game over
-      // clearTimeout(animation);
-      // animationText.classList.add('hidden');
-      // scoreText.classList.remove('hidden');
-      // levelText.classList.remove('hidden');
       startBtn.innerHTML = 'PAUSE';
       if (soundOn) { playTheme.play(); }
       draw();
