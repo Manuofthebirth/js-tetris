@@ -108,6 +108,14 @@
   justify-content: space-evenly;
 }
 
+.hide {
+  visibility: hidden;
+}
+
+.hidden {
+  display: none;
+}
+
 .logo {
   font-family: 'ModernTetris', sans !important;
   background-clip: text;

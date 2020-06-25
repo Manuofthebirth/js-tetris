@@ -1,8 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
   const grid = document.querySelector('.game-grid');
   let squares = Array.from(document.querySelectorAll('.game-grid div')); // select all divs in game grid
+  const scoreText = document.querySelector('.score-text');
   const scoreDisplay = document.querySelector('.score-num');
+  const levelText = document.querySelector('.level-text');
   const levelDisplay = document.querySelector('.level-num');
+  const animationText = document.querySelector('.animation-text');
   const logoDisplay = document.querySelector('.logo');
   const startBtn = document.querySelector('.start-btn');
   const soundBtn = document.querySelector('.music-btn');
@@ -278,6 +281,10 @@ document.addEventListener('DOMContentLoaded', () => {
       lockMobile();
     } else {
       if (lose) { location.reload(); } // checks for game over
+      clearTimeout(animation);
+      animationText.classList.add('hidden');
+      scoreText.classList.remove('hidden');
+      levelText.classList.remove('hidden');
       startBtn.innerHTML = 'PAUSE';
       if (soundOn) { playTheme.play(); }
       draw();
@@ -348,4 +355,11 @@ document.addEventListener('DOMContentLoaded', () => {
       } else { playTheme.pause(); }  // keep sound off when paused
     }
   })
+
+  // Press Start animation
+  function pressStart() {
+    animationText.classList.toggle('hide');
+  }
+
+  animation = setInterval(pressStart, 700);
 })
