@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
   const grid = document.querySelector('.game-grid');
   let squares = Array.from(document.querySelectorAll('.game-grid div')); // select all divs in game grid
-  const scoreText = document.querySelector('.score-text');
-  const scoreDisplay = document.querySelector('.score-num');
-  const levelText = document.querySelector('.level-text');
-  const levelDisplay = document.querySelector('.level-num');
   const animationText = document.querySelector('.animation-text');
+  const scoreText = document.querySelector('.score-text');
+  const levelText = document.querySelector('.level-text');
+  const scoreDisplay = document.querySelector('.score-num');
+  const levelDisplay = document.querySelector('.level-num');
   const logoDisplay = document.querySelector('.logo');
   const startBtn = document.querySelector('.start-btn');
   const soundBtn = document.querySelector('.music-btn');
@@ -18,6 +18,13 @@ document.addEventListener('DOMContentLoaded', () => {
   let lose = false;
   let soundOn = true;
   let timer; // null value by default
+
+  // Press Start animation
+  function pressStart() {
+    animationText.classList.toggle('hide');
+  }
+
+  animation = setInterval(pressStart, 700);
 
   // mobile commands >> change later
   const up = document.querySelector('#up')
@@ -355,11 +362,4 @@ document.addEventListener('DOMContentLoaded', () => {
       } else { playTheme.pause(); }  // keep sound off when paused
     }
   })
-
-  // Press Start animation
-  function pressStart() {
-    animationText.classList.toggle('hide');
-  }
-
-  animation = setInterval(pressStart, 700);
 })
