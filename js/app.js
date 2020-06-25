@@ -288,10 +288,10 @@ document.addEventListener('DOMContentLoaded', () => {
       lockMobile();
     } else {
       if (lose) { location.reload(); } // checks for game over
-      clearTimeout(animation);
-      animationText.classList.add('hidden');
-      scoreText.classList.remove('hidden');
-      levelText.classList.remove('hidden');
+      // clearTimeout(animation);
+      // animationText.classList.add('hidden');
+      // scoreText.classList.remove('hidden');
+      // levelText.classList.remove('hidden');
       startBtn.innerHTML = 'PAUSE';
       if (soundOn) { playTheme.play(); }
       draw();
