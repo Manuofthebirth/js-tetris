@@ -1,8 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
   const grid = document.querySelector('.game-grid');
   let squares = Array.from(document.querySelectorAll('.game-grid div')); // select all divs in game grid
+  const scoreText = document.querySelector('.score-text');
   const scoreDisplay = document.querySelector('.score-num');
+  const levelText = document.querySelector('.level-text');
   const levelDisplay = document.querySelector('.level-num');
+  const animationText = document.querySelector('.animation-text');
   const logoDisplay = document.querySelector('.logo');
   const startBtn = document.querySelector('.start-btn');
   const soundBtn = document.querySelector('.music-btn');
@@ -127,9 +130,6 @@ document.addEventListener('DOMContentLoaded', () => {
       squares[currentPosition + index].style.backgroundColor = '';
     })
   } 
-
-  // set tetromino to fall every second / EDIT: commented so game can start normally
-  // timer = setInterval(moveDown, 1000);
 
   // assign functions to inputs
   function input(i) {
@@ -267,6 +267,13 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
+  // Press Start animation
+  function pressStart() {
+    animationText.classList.toggle('hide');
+  }
+
+  animation = setInterval(pressStart, 700);
+
   // start/pause button
   startBtn.addEventListener('click', () => {
     // if time value isn't null >> pause
@@ -278,6 +285,10 @@ document.addEventListener('DOMContentLoaded', () => {
       lockMobile();
     } else {
       if (lose) { location.reload(); } // checks for game over
+      clearTimeout(animation); // end animation and show lines and lv counters
+      animationText.classList.add('hidden');
+      scoreText.classList.remove('hidden');
+      levelText.classList.remove('hidden');
       startBtn.innerHTML = 'PAUSE';
       if (soundOn) { playTheme.play(); }
       draw();
