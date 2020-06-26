@@ -51,6 +51,7 @@
 .container-fluid {
   display: flex;
   justify-content: center;
+  touch-action: manipulation;
 }
 
 .display-border {
@@ -106,6 +107,7 @@
 .counter {
   display: flex;
   justify-content: space-evenly;
+  width: 75vw !important;
 }
 
 .logo {
@@ -160,6 +162,9 @@
 }
 
 @media (min-width: 1025px) {
+  .counter {
+    width: 50vw !important;
+  }
   .logo {
     font-family: 'ModernTetris', sans !important;
     background-clip: text;
