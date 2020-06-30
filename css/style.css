@@ -51,7 +51,6 @@
 .container-fluid {
   display: flex;
   justify-content: center;
-  touch-action: manipulation !important;
 }
 
 .display-border {
@@ -75,7 +74,6 @@
 .tools {
   margin-left: 30px;
   width: 90px;
-  touch-action: manipulation !important;
 }
 
 .game-border {
@@ -94,7 +92,6 @@
   flex-wrap: wrap;
   height: 400px;
   width: 200px;
-  touch-action: manipulation !important;
 }
 
 .square {
@@ -199,7 +196,6 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  touch-action: manipulation !important;
 }
 
 body {
@@ -208,5 +204,4 @@ body {
   background-repeat: no-repeat;
   color: #fff !important;
   font-family: 'Tetrix', sans-serif !important;
-  touch-action: manipulation !important;
 }

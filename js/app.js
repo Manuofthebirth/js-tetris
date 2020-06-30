@@ -20,10 +20,10 @@ document.addEventListener('DOMContentLoaded', () => {
   let timer; // null value by default
 
   // mobile commands >> change later
-  const up = document.querySelector('#up')
-  const left = document.querySelector('#left')
-  const right = document.querySelector('#right')
-  const down = document.querySelector('#down')
+  const up = document.querySelector('#up');
+  const left = document.querySelector('#left');
+  const right = document.querySelector('#right');
+  const down = document.querySelector('#down');
   
   function lockMobile() {
     mobileBtns.forEach(btn => {
@@ -202,7 +202,6 @@ document.addEventListener('DOMContentLoaded', () => {
       currentTetromino = tetrominos[randomTetromino][currentRotation];
       currentPosition = 4; // default
       gameOver();
-      // draw(); // bug fix ; duplicate tetromino after cleared line
       displayTetromino();
       increaseScore();
     }
@@ -240,7 +239,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const displaySquares = document.querySelectorAll('.display-next-grid div'); // select all divs in display grid
   const displayWidth = 4;
   let displayIndex = 0;
-  // let nextRandom = 0;
 
   // tetrominos at default rotation
   const nextTetrominos = [
@@ -285,16 +283,15 @@ document.addEventListener('DOMContentLoaded', () => {
       lockMobile();
     } else {
       if (lose) { location.reload(); } // checks for game over
+      if (soundOn) { playTheme.play(); }
       clearTimeout(animation); // end animation and show lines and lv counters
       animationText.classList.add('hidden');
       scoreText.classList.remove('hidden');
       levelText.classList.remove('hidden');
       startBtn.innerHTML = 'PAUSE';
-      if (soundOn) { playTheme.play(); }
       draw();
       clearInterval(timer); 
       timer = setInterval(moveDown, 1100-100*level); // tetrominos drop 0.1 seconds faster after each lv
-      // nextRandom = Math.floor(Math.random()*tetrominos.length); // bug fix ; start/pause btn was changing next tetromino
       displayTetromino();
       unlockMobile();
     }
