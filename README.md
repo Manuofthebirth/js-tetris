@@ -4,6 +4,8 @@ A vanilla Javascript Tetris game based on [Ania Kubow](https://github.com/kubowa
 
 Click [here](https://manuofthebirth.github.io/js-tetris/) to play in your desktop, tablet or mobile device. 
 
+![Tetris](https://github.com/Manuofthebirth/js-tetris/blob/gh-pages/img/thumbnail.jpeg)
+
 ## What's different from the tutorial?
 
 * 7 tetromino blocks instead of 5
