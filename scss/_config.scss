@@ -1,0 +1,34 @@
+$grid-color: #C8C7A8; 
+$text-color: #fff;
+$btn-clickable: #993558;
+$btn-color: linear-gradient(#993558, #55071eef);
+
+// // tetromino colors
+// $colors: (
+//   orange: #F0A133,
+//   navy: #2E5BD8,
+//   green: #7DE71D,
+//   red: #ED4631,
+//   purple: #A86FF0,
+//   yellow: #A86FF0,
+//   // yellow: #EFED35,
+//   blue: #6AF1F1
+// );
+
+// default font
+@font-face {
+  font-family: 'Tetrix';
+  src: 
+    local('Tetrix'),
+    url('../font/tetrix.ttf') 
+    format('opentype');
+}
+
+// logo font
+@font-face {
+  font-family: 'ModernTetris';
+  src: 
+    local('ModernTetris'),
+    url('../font/modern-tetris/modern-tetris.ttf') 
+    format('opentype');
+}

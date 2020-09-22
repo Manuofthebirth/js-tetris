@@ -1,0 +1,49 @@
+// set bg + text color
+@mixin set-background {
+  background-image: linear-gradient(rgba(56, 94, 201, 0.4), rgba(0, 0, 0, 0.3)), url(../img/small-bg.jpg);
+  background-size: 100vw 100vh;
+  background-repeat: no-repeat;
+  color: $text-color !important;
+  font-family: 'Tetrix', sans-serif !important;
+}
+
+// set border config
+@mixin border-config {
+  align-items: center;
+  background: $btn-color;
+  border-style: double;
+  display: flex;
+  justify-content: center;
+}
+
+// set btn config
+@mixin btn-config {
+  color: $btn-clickable !important;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  text-shadow: 2px 1px 1px rgba(0, 0, 0, 0.1);
+  width: 90px;
+}
+
+// set logo font
+@mixin logo-font {
+  font-family: 'ModernTetris', sans !important;
+  background-clip: text; // compatibility
+  background-image: linear-gradient(#ED5354, #FCC337);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1.4px #7AC83E;
+  line-height: unset;
+  margin-top: 25px;
+  margin-bottom: 5px;
+  text-align: center;
+  text-shadow: none;
+}
+
+// set grid config
+@mixin grid-config {
+  background-color: $grid-color;
+  display: flex;
+  flex-wrap: wrap;
+}

@@ -1,0 +1,42 @@
+.container-fluid {
+  display: flex;
+  justify-content: center;
+}
+
+.display-border {
+  @include border-config;
+  height: 50px;
+  width: 90px;
+}
+
+.display-next-grid { 
+  @include grid-config;
+  height: 40px;
+  width: 80px;
+}
+
+.tools { 
+  margin-left: 30px;
+  width: 90px;
+}
+
+.game-border {
+  @include border-config;
+  height: 410px;
+  width: 210px;
+}
+
+.game-grid {
+  @include grid-config;
+  height: 400px;
+  width: 200px;
+}
+
+.square {
+  height: 20px;
+  width: 20px;
+}
+
+.tetromino {
+  border-style: outset;
+}

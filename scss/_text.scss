@@ -1,0 +1,24 @@
+.counter {
+  display: flex;
+  justify-content: space-evenly;
+  width: 75vw !important;
+}
+
+.hide {
+  visibility: hidden;
+}
+
+.hidden {
+  display: none;
+}
+
+.logo {
+  @include logo-font;
+  font-size: 9.5vw;
+}
+
+.text {
+  font-size: 7.5vw;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+}

@@ -1,0 +1,16 @@
+@import 'config';
+@import 'mixins'; 
+@import 'buttons';
+@import 'components';
+@import 'text'; 
+@import 'queries'; 
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+};
+
+body {
+  @include set-background;
+}

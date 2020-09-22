@@ -1,0 +1,40 @@
+// mobile
+@media(max-width: 359px) {
+  .tools {
+    margin-left: 10px;
+  }
+  .logo {
+    -webkit-text-stroke: 1.2px #7AC83E;
+  }
+}
+
+// tablet
+@media(min-width: 768px) {
+  .logo {
+    @include logo-font;
+    font-size: 9.5vw;
+    -webkit-text-stroke: 2.4px #7AC83E;
+  }
+
+  .text {
+    font-size: 5vw;
+  }
+}
+
+// desktop
+
+@media(min-width: 1025px) {
+  .counter {
+    width: 50vw !important;
+  }
+
+  .logo {
+    @include logo-font;
+    font-size: 6.5vw;
+    -webkit-text-stroke: 3px #7AC83E;
+  }
+
+  .text {
+    font-size: 3vw;
+  }
+}
