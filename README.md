@@ -31,7 +31,6 @@ Click [here](https://manutetris.herokuapp.com/) to play in your desktop, tablet 
 * Bootstrap
 * Font Awesome
 * Git
-* GitHub
 
 ## To do
 
