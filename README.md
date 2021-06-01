@@ -2,7 +2,7 @@
 
 A vanilla Javascript Tetris game based on [Ania Kubow](https://github.com/kubowania)'s [tutorial](https://www.youtube.com/watch?v=rAUn1Lom6dw) in FreeCodeCamp with my personal touch.
 
-Click [here](https://manutetris.herokuapp.com/) to play in your desktop, tablet or mobile device. 
+Click [here](https://manutetris.herokuapp.com/) to play it in your desktop, tablet or mobile device. 
 
 ![Tetris](https://github.com/Manuofthebirth/js-tetris/blob/master/img/thumbnail.jpeg)
 
